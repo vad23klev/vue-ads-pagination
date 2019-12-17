@@ -49,7 +49,7 @@ export default {
             end: null,
             page: 0,
             maxVisiblePages: 0,
-            totalItems: 120,
+            totalItems: 31,
             loading: false,
             itemsPerPage: 10,
         };
