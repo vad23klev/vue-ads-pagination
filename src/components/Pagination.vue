@@ -64,7 +64,7 @@ export default {
             type: Number,
             default: 5,
             validator: (maxVisiblePages) => {
-                return maxVisiblePages > 0;
+                return maxVisiblePages >= 0;
             },
         },
 
@@ -112,7 +112,11 @@ export default {
                 [
                     ...Array(this.totalPages - 2).keys(),
                 ].map(page => page + 1);
-
+            if (this.maxVisiblePages === 0) {
+                pages = [
+                    ...new Set(pages),
+                ]; 
+            }
             return [
                 this.page - 1,
                 0,
@@ -131,10 +135,12 @@ export default {
             if (toFilterPages.length > this.maxVisiblePages) {
                 let diffFirst = this.page - toFilterPages[0];
                 let diffLast = this.page - toFilterPages[toFilterPages.length - 1];
-
                 if (diffFirst < diff) {
                     return toFilterPages.slice(0, this.maxVisiblePages);
                 } else if (diffLast >= -diff) {
+                    if (this.maxVisiblePages === 0) {
+                        return toFilterPages.slice(0, this.maxVisiblePages);
+                    }
                     return toFilterPages.slice(-this.maxVisiblePages);
                 } else {
                     return toFilterPages.filter(page => {

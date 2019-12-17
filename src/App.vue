@@ -48,8 +48,8 @@ export default {
             start: null,
             end: null,
             page: 0,
-            maxVisiblePages: 4,
-            totalItems: 12,
+            maxVisiblePages: 0,
+            totalItems: 120,
             loading: false,
             itemsPerPage: 10,
         };
